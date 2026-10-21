@@ -1,0 +1,27 @@
+# Pik Pickle - runtime dependencies
+Flask>=3.0
+requests>=2.31
+
+# Primary IMDb provider. Optional: the app falls back to the keyless
+# IMDb suggestion API + Wikidata/Wikipedia when Cinemagoer is unavailable.
+cinemagoer>=2022.7.9
+
+# Real download engine - the backend drives yt-dlp as a subprocess
+# (python -m yt_dlp) and parses its live progress output for the queue UI.
+yt-dlp>=2024.1.0
+
+# Real-time transport - streams download progress, activity toasts and vault
+# updates to the browser over WebSocket (Socket.IO). Without these packages the
+# SPA automatically falls back to /api/* polling.
+flask-socketio>=5.3
+simple-websocket>=1.0
+
+# ffmpeg must be on PATH so yt-dlp can merge separate video/audio streams into
+# a single .mp4. Install it system-wide, or uncomment the bundled binary below:
+# imageio-ffmpeg>=0.4.9
+
+# Optional: only needed for the PostgreSQL backend (see pik_pickle/database).
+# psycopg[binary]>=3.1
+
+# Optional: set OMDB_API_KEY to enrich ratings via OMDb.
+# Get a free key at https://www.omdbapi.com/apikey.aspx
