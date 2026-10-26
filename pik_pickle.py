@@ -1,17 +1,18 @@
-"""Alias module for the Pik Pickle database layer.
+"""Alias module for the Pik Pickle database layer."""
 
-The canonical implementation lives in :mod:`database`; this module simply
-re-exports its public API under the name the Pik Pickle application and its
-documentation refer to (``import pik_pickle as db``).
+import pickle
+import os
 
-The default database *file* used by the app is chosen explicitly by ``app.py``
-(``pik_pickle.db`` next to these files, or ``$PIK_PICKLE_DB``), so importing
-this module has no hidden side effects.
-"""
+__all__ = ["load_db", "save_db"]
 
-from __future__ import annotations
+DB_FILE = "bigpickle.db"
 
-from database import *  # noqa: F401,F403  (re-export the public API)
-from database import __all__ as _database_all
+def load_db():
+    if os.path.exists(DB_FILE) and os.path.getsize(DB_FILE) > 0:
+        with open(DB_FILE, "rb") as f:
+            return pickle.load(f)
+    return {}
 
-__all__ = list(_database_all)
+def save_db(data):
+    with open(DB_FILE, "wb") as f:
+        pickle.dump(data, f)
