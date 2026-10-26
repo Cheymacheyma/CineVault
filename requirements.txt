@@ -1,4 +1,3 @@
-# Pik Pickle - runtime dependencies
 Flask>=3.0
 requests>=2.31
 
@@ -25,3 +24,7 @@ simple-websocket>=1.0
 
 # Optional: set OMDB_API_KEY to enrich ratings via OMDb.
 # Get a free key at https://www.omdbapi.com/apikey.aspx
+
+# Production Server (Required for Cloud Deployment)
+gunicorn
+
